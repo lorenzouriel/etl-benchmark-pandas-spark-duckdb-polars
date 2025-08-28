@@ -1,5 +1,4 @@
 import modin.pandas as pd
-import pandas as pd
 
 def run():
     df = pd.read_csv("data/orders_large.csv")
