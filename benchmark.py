@@ -49,12 +49,14 @@ def etl_modin():
 
 def main():
     print("Starting ETL benchmark...\n")
+    etl_modin()
+    print("Modin ETL completed.")
     etl_pandas()
     print("Pandas ETL completed.")
     etl_polars()
     print("Polars ETL completed.")
-    etl_modin()
-    print("Modin ETL completed.\n")
+    etl_duckdb()
+    print("DuckDB ETL completed.")
     etl_spark()
     print("Spark ETL completed.")
     
