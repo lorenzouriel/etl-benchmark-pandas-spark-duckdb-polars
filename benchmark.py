@@ -3,6 +3,7 @@ from notebooks.pandas_etl import run as pandas_etl
 from notebooks.polars_etl import run as polars_etl
 from notebooks.duckdb_etl import run as duckdb_etl
 from notebooks.modin_etl import run as modin_etl
+from notebooks.spark_etl import run as spark_etl
 
 etl_report = {}
 
@@ -22,14 +23,13 @@ def etl_polars():
     end = time.time()
     etl_report["polars"] = (start, end)
 
-# MAINTENANCE: Spark ETL is currently disabled due to environment issues.
-# def etl_spark():
-#     start = time.time()
+def etl_spark():
+    start = time.time()
     
-#     spark_etl()
+    spark_etl()
     
-#     end = time.time()
-#     etl_report["spark"] = (start, end)
+    end = time.time()
+    etl_report["spark"] = (start, end)
 
 def etl_duckdb():
     start = time.time()
@@ -53,12 +53,10 @@ def main():
     print("Pandas ETL completed.")
     etl_polars()
     print("Polars ETL completed.")
-    # etl_spark()
-    # print("Spark ETL completed.")
-    etl_duckdb()
-    print("DuckDB ETL completed.")
     etl_modin()
     print("Modin ETL completed.\n")
+    etl_spark()
+    print("Spark ETL completed.")
     
     print("=== ETL Benchmark Report ===")
     for tool, (start, end) in etl_report.items():

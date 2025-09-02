@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, month, year, concat_ws
+from pyspark.sql.functions import col, month, year
 
 from pyspark.sql import SparkSession
 
@@ -15,6 +15,6 @@ def run():
 
     top_products = df.groupBy("product").sum("total_amount").orderBy(col("sum(total_amount)").desc()).limit(5)
 
-    category_sales.write.csv("output/spark_category_sales.csv", header=True, mode="overwrite")
-    monthly_sales.write.csv("output/spark_monthly_sales.csv", header=True, mode="overwrite")
-    top_products.write.csv("output/spark_top_products.csv", header=True, mode="overwrite")  
+    category_sales.toPandas().to_csv("output/spark_category_sales.csv", index=False)
+    monthly_sales.toPandas().to_csv("output/spark_monthly_sales.csv", index=False)
+    top_products.toPandas().to_csv("output/spark_top_products.csv", index=False)
